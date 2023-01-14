@@ -21,39 +21,42 @@ const App = () => {
                 <Center>
                     <Stack>
                         <Group>
-                            <Tile code={'M1'} />
-                            <Tile code={'M2'} />
-                            <Tile code={'M3'} />
-                            <Tile code={'M4'} />
-                            <Tile code={'M5'} />
-                            <Tile code={'M6'} />
-                            <Tile code={'M7'} />
-                            <Tile code={'M8'} />
-                            <Tile code={'M9'} />
+                            <Tile code={'M1'} showName />
+                            <Tile code={'M2'} showName />
+                            <Tile code={'M3'} showName />
+                            <Tile code={'M4'} showName />
+                            <Tile code={'M5'} showName />
+                            <Tile code={'M5d'} showName />
+                            <Tile code={'M6'} showName />
+                            <Tile code={'M7'} showName />
+                            <Tile code={'M8'} showName />
+                            <Tile code={'M9'} showName />
                         </Group>
 
                         <Group>
-                            <Tile code={'P1'} />
-                            <Tile code={'P2'} />
-                            <Tile code={'P3'} />
-                            <Tile code={'P4'} />
-                            <Tile code={'P5'} />
-                            <Tile code={'P6'} />
-                            <Tile code={'P7'} />
-                            <Tile code={'P8'} />
-                            <Tile code={'P9'} />
+                            <Tile code={'P1'} showName />
+                            <Tile code={'P2'} showName />
+                            <Tile code={'P3'} showName />
+                            <Tile code={'P4'} showName />
+                            <Tile code={'P5'} showName />
+                            <Tile code={'P5d'} showName />
+                            <Tile code={'P6'} showName />
+                            <Tile code={'P7'} showName />
+                            <Tile code={'P8'} showName />
+                            <Tile code={'P9'} showName />
                         </Group>
 
                         <Group>
-                            <Tile code={'S1'} />
-                            <Tile code={'S2'} />
-                            <Tile code={'S3'} />
-                            <Tile code={'S4'} />
-                            <Tile code={'S5'} />
-                            <Tile code={'S6'} />
-                            <Tile code={'S7'} />
-                            <Tile code={'S8'} />
-                            <Tile code={'S9'} />
+                            <Tile code={'S1'} showName />
+                            <Tile code={'S2'} showName />
+                            <Tile code={'S3'} showName />
+                            <Tile code={'S4'} showName />
+                            <Tile code={'S5'} showName />
+                            <Tile code={'S5d'} showName />
+                            <Tile code={'S6'} showName />
+                            <Tile code={'S7'} showName />
+                            <Tile code={'S8'} showName />
+                            <Tile code={'S9'} showName />
                         </Group>
                     </Stack>
                 </Center>

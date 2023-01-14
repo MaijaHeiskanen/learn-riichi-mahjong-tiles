@@ -1,4 +1,4 @@
-import { ThemeIcon } from '@mantine/core';
+import { Stack, ThemeIcon, Text } from '@mantine/core';
 
 import { ReactComponent as Blank } from './../../svgs/white_tiles/Blank.svg';
 
@@ -156,6 +156,7 @@ const DRAGON_TILES: DRAGON_TILES = {
 
 type TileProps = {
     code: TILES;
+    showName?: boolean;
 };
 
 const mapStringToTile = (tile: TileProps['code']) => {
@@ -197,10 +198,88 @@ const mapStringToTile = (tile: TileProps['code']) => {
     }
 };
 
-export const Tile = ({ code }: TileProps) => {
+const isDora = (value: string): boolean => {
+    return value.at(-1) === 'd';
+};
+
+const mapWindLetterToName = (letter: TILE_WINDS) => {
+    switch (letter) {
+        case 'E':
+            return 'East';
+        case 'S':
+            return 'South';
+        case 'W':
+            return 'West';
+        case 'N':
+            return 'North';
+    }
+};
+
+const mapDragonLetterToName = (letter: TILE_DRAGONS) => {
+    switch (letter) {
+        case 'R':
+            return 'Red';
+        case 'W':
+            return 'White';
+        case 'G':
+            return 'Green';
+    }
+};
+
+const mapStringToName = (tile: TileProps['code']) => {
+    const firstChar = tile[0];
+    const rest = tile.slice(1);
+
+    let name = '';
+
+    switch (firstChar) {
+        case 'M':
+            name += 'Man';
+            if (isDora(rest)) {
+                return `${name} ${rest[0]} Dora`;
+            }
+
+            return `${name} ${rest[0]}`;
+            break;
+
+        case 'P':
+            name += 'Pin';
+            if (isDora(rest)) {
+                return `${name} ${rest[0]} Dora`;
+            }
+
+            return `${name} ${rest[0]}`;
+            break;
+
+        case 'S':
+            name += 'Sou';
+
+            return `${name} ${rest[0]}`;
+            break;
+
+        case 'W':
+            return `${mapWindLetterToName(rest as TILE_WINDS)} Wind`;
+            break;
+
+        case 'D':
+            return `${mapDragonLetterToName(rest as TILE_DRAGONS)} Dragon`;
+            break;
+        default:
+            return 'Unknown tile';
+    }
+};
+
+export const Tile = ({ code, showName }: TileProps) => {
     return (
-        <ThemeIcon h={100} w={75} color={'white'}>
-            {mapStringToTile(code)}
-        </ThemeIcon>
+        <Stack>
+            <ThemeIcon h={100} w={75} color={'white'}>
+                {mapStringToTile(code)}
+            </ThemeIcon>
+            {showName && (
+                <Text size={'sm'} align="center">
+                    {mapStringToName(code)}
+                </Text>
+            )}
+        </Stack>
     );
 };
