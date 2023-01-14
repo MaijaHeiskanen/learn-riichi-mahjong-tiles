@@ -1,9 +1,12 @@
-import { Group, Stack } from '@mantine/core';
-import { Tile } from './tiles/Tile';
+import { Group, Stack, Title } from '@mantine/core';
+import { Tile } from './Tile';
 
 export const TileList = () => {
     return (
         <Stack>
+            <Title>Riichi Tiles</Title>
+
+            <Title size={'h3'}>Man</Title>
             <Group>
                 <Tile code={'M1'} showName />
                 <Tile code={'M2'} showName />
@@ -17,6 +20,7 @@ export const TileList = () => {
                 <Tile code={'M9'} showName />
             </Group>
 
+            <Title size={'h3'}>Pin</Title>
             <Group>
                 <Tile code={'P1'} showName />
                 <Tile code={'P2'} showName />
@@ -30,6 +34,7 @@ export const TileList = () => {
                 <Tile code={'P9'} showName />
             </Group>
 
+            <Title size={'h3'}>Sou</Title>
             <Group>
                 <Tile code={'S1'} showName />
                 <Tile code={'S2'} showName />
@@ -43,6 +48,7 @@ export const TileList = () => {
                 <Tile code={'S9'} showName />
             </Group>
 
+            <Title size={'h3'}>Winds</Title>
             <Group>
                 <Tile code={'WE'} showName />
                 <Tile code={'WS'} showName />
@@ -50,6 +56,7 @@ export const TileList = () => {
                 <Tile code={'WW'} showName />
             </Group>
 
+            <Title size={'h3'}>Dragons</Title>
             <Group>
                 <Tile code={'DR'} showName />
                 <Tile code={'DW'} showName />

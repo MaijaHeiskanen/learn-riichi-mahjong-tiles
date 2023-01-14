@@ -1,9 +1,10 @@
-import { MantineProvider, AppShell, Center } from '@mantine/core';
+import { MantineProvider, AppShell, Center, Space } from '@mantine/core';
 import { useState } from 'react';
-import { SiteFooter } from './SiteFooter';
-import { SiteHeader } from './SiteHeader';
-import { PAGES, SiteNavbar } from './SiteNavbar';
-import { TileList } from './TileList';
+import { GameMenu } from './games/GameMenu';
+import { SiteFooter } from './layout/SiteFooter';
+import { SiteHeader } from './layout/SiteHeader';
+import { PAGES, SiteNavbar } from './layout/SiteNavbar';
+import { TileList } from './tiles/TileList';
 
 const App = () => {
     const [page, setPage] = useState<PAGES>(PAGES.TILES);
@@ -19,7 +20,6 @@ const App = () => {
         >
             <AppShell
                 navbarOffsetBreakpoint="sm"
-                asideOffsetBreakpoint="sm"
                 navbar={
                     <SiteNavbar opened={opened} page={page} setPage={setPage} />
                 }
@@ -28,9 +28,11 @@ const App = () => {
             >
                 <Center>
                     {page === PAGES.TILES && <TileList />}
-                    {page === PAGES.TEST && 'Test'}
+                    {page === PAGES.TEST && <GameMenu />}
                     {page === PAGES.STATS && 'Stats'}
                 </Center>
+
+                <Space h={'xl'} />
             </AppShell>
         </MantineProvider>
     );
