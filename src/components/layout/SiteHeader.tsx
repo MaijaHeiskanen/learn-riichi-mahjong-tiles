@@ -16,7 +16,7 @@ export const SiteHeader = ({ opened, setOpened }: SiteHeaderProps) => {
     const theme = useMantineTheme();
 
     return (
-        <Header height={{ base: 30, md: 40 }} p={{ base: 'md', md: 'md' }}>
+        <Header height={{ base: 40, md: 40 }} p={{ base: 'md', md: 'md' }}>
             <div
                 style={{
                     display: 'flex',

@@ -1,6 +1,7 @@
 {
     "name": "learn-riichi-mahjong-tiles",
     "version": "0.1.0",
+    "homepage": "https://MaijaHeiskanen.github.io/learn-riichi-mahjong-tiles",
     "private": true,
     "dependencies": {
         "@emotion/react": "^11.10.5",
@@ -21,6 +22,8 @@
         "web-vitals": "^2.1.0"
     },
     "scripts": {
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build -f",
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
@@ -43,5 +46,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "gh-pages": "^4.0.0"
     }
 }

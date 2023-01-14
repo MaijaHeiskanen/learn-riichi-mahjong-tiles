@@ -1,10 +1,34 @@
 import { Center, Container, Stack, Title, Text } from '@mantine/core';
 import { useState } from 'react';
 import { GameList } from './GameList';
+import { SelectMatchingNameForTile } from './SelectMatchingNameForTile';
+import { GAME_TYPES } from './utils/consts';
 import { GameSettings } from './utils/games';
 
 export const GameMenu = () => {
     const [game, setGame] = useState<GameSettings | null>(null);
+
+    const getContent = () => {
+        const gameType = game ? game.type : null;
+
+        switch (gameType) {
+            case null:
+                return <GameList setGame={setGame} />;
+            case GAME_TYPES.SELECT_SUIT_FOR_TILE:
+                return <Text>Coming soon...</Text>;
+            case GAME_TYPES.SELECT_NAME_FOR_TILE:
+                return (
+                    <SelectMatchingNameForTile
+                        includes={game!.includes}
+                        type={game!.type}
+                    />
+                );
+            case GAME_TYPES.SELECT_TILE_FOR_NAME:
+                return <Text>Coming soon...</Text>;
+            case GAME_TYPES.WRITE_NAME_FOR_TILE:
+                return <Text>Coming soon...</Text>;
+        }
+    };
 
     return (
         <Stack>
@@ -17,9 +41,7 @@ export const GameMenu = () => {
                     below and click "Start game"!
                 </Text>
             </Container>
-            <Center>
-                <GameList setGame={setGame} />
-            </Center>
+            <Center>{getContent()}</Center>
         </Stack>
     );
 };

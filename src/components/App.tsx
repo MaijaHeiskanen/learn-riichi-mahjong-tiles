@@ -4,6 +4,7 @@ import { GameMenu } from './games/GameMenu';
 import { SiteFooter } from './layout/SiteFooter';
 import { SiteHeader } from './layout/SiteHeader';
 import { PAGES, SiteNavbar } from './layout/SiteNavbar';
+import { Stats } from './stats/Stats';
 import { TileList } from './tiles/TileList';
 
 const App = () => {
@@ -29,7 +30,7 @@ const App = () => {
                 <Center>
                     {page === PAGES.TILES && <TileList />}
                     {page === PAGES.TEST && <GameMenu />}
-                    {page === PAGES.STATS && 'Stats'}
+                    {page === PAGES.STATS && <Stats />}
                 </Center>
 
                 <Space h={'xl'} />
