@@ -273,7 +273,7 @@ const mapStringToName = (tile: TileProps['code']) => {
             return 'Unknown tile';
 
         case 'D':
-            if (isTileWind(rest)) {
+            if (isTileDragon(rest)) {
                 return `${mapDragonLetterToName(rest as TILE_DRAGON)} Dragon`;
             }
             return 'Unknown tile';
