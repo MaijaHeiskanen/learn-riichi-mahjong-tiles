@@ -168,31 +168,31 @@ const mapStringToTile = (tile: TileProps['code']) => {
             if (isTileNumber(rest)) {
                 return MAN_TILES[rest];
             }
-            break;
+            return <Blank />;
 
         case 'P':
             if (isTileNumber(rest)) {
                 return PIN_TILES[rest];
             }
-            break;
+            return <Blank />;
 
         case 'S':
             if (isTileNumber(rest)) {
                 return SOU_TILES[rest];
             }
-            break;
+            return <Blank />;
 
         case 'W':
             if (isTileWind(rest)) {
                 return WIND_TILES[`${firstChar}${rest}`];
             }
-            break;
+            return <Blank />;
 
         case 'D':
             if (isTileDragon(rest)) {
                 return DRAGON_TILES[`${firstChar}${rest}`];
             }
-            break;
+            return <Blank />;
         default:
             return <Blank />;
     }
@@ -235,35 +235,49 @@ const mapStringToName = (tile: TileProps['code']) => {
     switch (firstChar) {
         case 'M':
             name += 'Man';
-            if (isDora(rest)) {
-                return `${name} ${rest[0]} Dora`;
-            }
+            if (isTileNumber(rest)) {
+                if (isDora(rest)) {
+                    return `${name} ${rest[0]} Red`;
+                }
 
-            return `${name} ${rest[0]}`;
-            break;
+                return `${name} ${rest[0]}`;
+            }
+            return 'Unknown tile';
 
         case 'P':
             name += 'Pin';
-            if (isDora(rest)) {
-                return `${name} ${rest[0]} Dora`;
-            }
+            if (isTileNumber(rest)) {
+                if (isDora(rest)) {
+                    return `${name} ${rest[0]} Red`;
+                }
 
-            return `${name} ${rest[0]}`;
-            break;
+                return `${name} ${rest[0]}`;
+            }
+            return 'Unknown tile';
 
         case 'S':
             name += 'Sou';
+            if (isTileNumber(rest)) {
+                if (isDora(rest)) {
+                    return `${name} ${rest[0]} Red`;
+                }
 
-            return `${name} ${rest[0]}`;
-            break;
+                return `${name} ${rest[0]}`;
+            }
+            return 'Unknown tile';
 
         case 'W':
-            return `${mapWindLetterToName(rest as TILE_WINDS)} Wind`;
-            break;
+            if (isTileWind(rest)) {
+                return `${mapWindLetterToName(rest as TILE_WINDS)}`;
+            }
+            return 'Unknown tile';
 
         case 'D':
-            return `${mapDragonLetterToName(rest as TILE_DRAGONS)} Dragon`;
-            break;
+            if (isTileWind(rest)) {
+                return `${mapDragonLetterToName(rest as TILE_DRAGONS)} Dragon`;
+            }
+            return 'Unknown tile';
+
         default:
             return 'Unknown tile';
     }
@@ -272,7 +286,7 @@ const mapStringToName = (tile: TileProps['code']) => {
 export const Tile = ({ code, showName }: TileProps) => {
     return (
         <Stack>
-            <ThemeIcon h={100} w={75} color={'white'}>
+            <ThemeIcon p={5} h={100} w={75} color={'white'}>
                 {mapStringToTile(code)}
             </ThemeIcon>
             {showName && (

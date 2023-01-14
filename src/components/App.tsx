@@ -58,6 +58,19 @@ const App = () => {
                             <Tile code={'S8'} showName />
                             <Tile code={'S9'} showName />
                         </Group>
+
+                        <Group>
+                            <Tile code={'WE'} showName />
+                            <Tile code={'WS'} showName />
+                            <Tile code={'WN'} showName />
+                            <Tile code={'WW'} showName />
+                        </Group>
+
+                        <Group>
+                            <Tile code={'DR'} showName />
+                            <Tile code={'DW'} showName />
+                            <Tile code={'DG'} showName />
+                        </Group>
                     </Stack>
                 </Center>
             </AppShell>
