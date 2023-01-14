@@ -52,6 +52,20 @@ const GAMES: Game[] = [
                 difficulty: 1,
                 includes: [...SUITS],
             },
+            {
+                difficulty: 2,
+                includes: [...SUITS, ...HONORS],
+            },
+        ],
+    },
+    {
+        type: GAME_TYPES.WRITE_NAME_FOR_TILE,
+        value: '5',
+        modes: [
+            {
+                difficulty: 5,
+                includes: [...SUITS, ...HONORS],
+            },
         ],
     },
     {
@@ -104,16 +118,6 @@ const GAMES: Game[] = [
             {
                 difficulty: 5,
                 includes: [INCLUDED_TILES.MAN, INCLUDED_TILES.WINDS],
-            },
-        ],
-    },
-    {
-        type: GAME_TYPES.WRITE_NAME_FOR_TILE,
-        value: '5',
-        modes: [
-            {
-                difficulty: 5,
-                includes: [...SUITS, ...HONORS],
             },
         ],
     },
@@ -175,15 +179,20 @@ const mapGameTypeToNameAndDescription = (type: GAME_TYPES) => {
             };
         case GAME_TYPES.WRITE_NAME_FOR_TILE:
             return {
-                name: 'Write the name of a tile',
+                name: 'Write a name of a tile',
                 description:
                     'You are shown a tile. You need to to write the name of the tile.',
             };
     }
 };
 
+type GameSettings = {
+    type: GAME_TYPES;
+    includes: INCLUDED_TILES[];
+};
+
 export const GameMenu = () => {
-    const [game, setGame] = useState<string | null>(null);
+    const [game, setGame] = useState<GameSettings | null>(null);
 
     return (
         <Stack>
@@ -196,74 +205,90 @@ export const GameMenu = () => {
                     below and click "Start game"!
                 </Text>
             </Container>
-            <Flex wrap={'wrap'} gap={'lg'} justify={'center'}>
-                {GAMES.map(({ value, type, modes }) => {
-                    const { name, description } =
-                        mapGameTypeToNameAndDescription(type);
+            <Center>
+                <SimpleGrid
+                    cols={2}
+                    breakpoints={[{ maxWidth: 'md', cols: 1 }]}
+                >
+                    {GAMES.map(({ value, type, modes }) => {
+                        const { name, description } =
+                            mapGameTypeToNameAndDescription(type);
 
-                    return (
-                        <Container size={400} ml={0} mr={0} pl={0} pr={0}>
-                            <Card>
-                                <Stack>
-                                    <Title size={'h3'}>{name}</Title>
-                                    <Text>{description}</Text>
+                        return (
+                            <Container size={400} ml={0} mr={0} pl={0} pr={0}>
+                                <Card>
                                     <Stack>
-                                        {modes.map(
-                                            (
-                                                { difficulty, includes },
-                                                index
-                                            ) => {
-                                                return (
-                                                    <>
-                                                        <Divider />
-                                                        <SimpleGrid cols={2}>
-                                                            <Stack>
-                                                                <Group
-                                                                    spacing={
-                                                                        'xs'
-                                                                    }
-                                                                >
-                                                                    {includes.map(
-                                                                        value =>
-                                                                            mapTileTypeToBadge(
-                                                                                value
-                                                                            )
-                                                                    )}
-                                                                </Group>
-                                                                <Rating
-                                                                    defaultValue={
-                                                                        difficulty
-                                                                    }
-                                                                    readOnly={
-                                                                        true
-                                                                    }
-                                                                />
-                                                            </Stack>
-                                                            <Center>
-                                                                <Button
-                                                                    onClick={() =>
-                                                                        setGame(
-                                                                            value
-                                                                        )
-                                                                    }
-                                                                >
+                                        <Title size={'h3'}>{name}</Title>
+                                        <Text>{description}</Text>
+                                        <Stack>
+                                            {modes.map(
+                                                (
+                                                    { difficulty, includes },
+                                                    index
+                                                ) => {
+                                                    return (
+                                                        <>
+                                                            <Divider />
+                                                            <SimpleGrid
+                                                                cols={2}
+                                                                breakpoints={[
                                                                     {
-                                                                        'Start game'
-                                                                    }
-                                                                </Button>
-                                                            </Center>
-                                                        </SimpleGrid>
-                                                    </>
-                                                );
-                                            }
-                                        )}
+                                                                        maxWidth: 400,
+                                                                        cols: 1,
+                                                                    },
+                                                                ]}
+                                                            >
+                                                                <Stack>
+                                                                    <Group
+                                                                        spacing={
+                                                                            'xs'
+                                                                        }
+                                                                    >
+                                                                        {includes.map(
+                                                                            value =>
+                                                                                mapTileTypeToBadge(
+                                                                                    value
+                                                                                )
+                                                                        )}
+                                                                    </Group>
+                                                                    <Rating
+                                                                        defaultValue={
+                                                                            difficulty
+                                                                        }
+                                                                        readOnly={
+                                                                            true
+                                                                        }
+                                                                    />
+                                                                </Stack>
+                                                                <Center>
+                                                                    <Button
+                                                                        onClick={() =>
+                                                                            setGame(
+                                                                                {
+                                                                                    type,
+                                                                                    includes,
+                                                                                }
+                                                                            )
+                                                                        }
+                                                                    >
+                                                                        {
+                                                                            'Start game'
+                                                                        }
+                                                                    </Button>
+                                                                </Center>
+                                                            </SimpleGrid>
+                                                        </>
+                                                    );
+                                                }
+                                            )}
+                                        </Stack>
                                     </Stack>
-                                </Stack>
-                            </Card>
-                        </Container>
-                    );
-                })}
-            </Flex>
+                                </Card>
+                            </Container>
+                        );
+                    })}
+                </SimpleGrid>
+            </Center>
         </Stack>
     );
 };
