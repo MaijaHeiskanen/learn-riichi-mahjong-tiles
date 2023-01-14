@@ -13,7 +13,7 @@ import { ReactComponent as Man7 } from './../../svgs/white_tiles/Man7.svg';
 import { ReactComponent as Man8 } from './../../svgs/white_tiles/Man8.svg';
 import { ReactComponent as Man9 } from './../../svgs/white_tiles/Man9.svg';
 
-import { ReactComponent as Pin1 } from './../../svgs/white_tiles/Man1.svg';
+import { ReactComponent as Pin1 } from './../../svgs/white_tiles/Pin1.svg';
 import { ReactComponent as Pin2 } from './../../svgs/white_tiles/Pin2.svg';
 import { ReactComponent as Pin3 } from './../../svgs/white_tiles/Pin3.svg';
 import { ReactComponent as Pin4 } from './../../svgs/white_tiles/Pin4.svg';
@@ -24,7 +24,7 @@ import { ReactComponent as Pin7 } from './../../svgs/white_tiles/Pin7.svg';
 import { ReactComponent as Pin8 } from './../../svgs/white_tiles/Pin8.svg';
 import { ReactComponent as Pin9 } from './../../svgs/white_tiles/Pin9.svg';
 
-import { ReactComponent as Sou1 } from './../../svgs/white_tiles/Man1.svg';
+import { ReactComponent as Sou1 } from './../../svgs/white_tiles/Sou1.svg';
 import { ReactComponent as Sou2 } from './../../svgs/white_tiles/Sou2.svg';
 import { ReactComponent as Sou3 } from './../../svgs/white_tiles/Sou3.svg';
 import { ReactComponent as Sou4 } from './../../svgs/white_tiles/Sou4.svg';
