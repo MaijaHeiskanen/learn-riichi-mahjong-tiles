@@ -60,24 +60,24 @@ type SUIT_TILES = {
     [key in TILE_NUMBERS_1_TO_9]: JSX.Element;
 };
 
-type TILE_WINDS = 'E' | 'S' | 'W' | 'N';
+type TILE_WIND = 'E' | 'S' | 'W' | 'N';
 
-type WIND_TILES = {
-    [key in `W${TILE_WINDS}`]: JSX.Element;
+type WIND_TILES_TYPE = {
+    [key in `W${TILE_WIND}`]: JSX.Element;
 };
 
-type TILE_DRAGONS = 'R' | 'W' | 'G';
+type TILE_DRAGON = 'R' | 'W' | 'G';
 
-type DRAGON_TILES = {
-    [key in `D${TILE_DRAGONS}`]: JSX.Element;
+type DRAGON_TILES_TYPE = {
+    [key in `D${TILE_DRAGON}`]: JSX.Element;
 };
 
 type TILES =
     | `M${TILE_NUMBERS_1_TO_9}`
     | `P${TILE_NUMBERS_1_TO_9}`
     | `S${TILE_NUMBERS_1_TO_9}`
-    | `W${TILE_WINDS}`
-    | `D${TILE_DRAGONS}`;
+    | `W${TILE_WIND}`
+    | `D${TILE_DRAGON}`;
 
 const isTileNumber = (value: string): value is TILE_NUMBERS_1_TO_9 => {
     return (
@@ -94,11 +94,11 @@ const isTileNumber = (value: string): value is TILE_NUMBERS_1_TO_9 => {
     );
 };
 
-const isTileWind = (value: string): value is TILE_WINDS => {
+const isTileWind = (value: string): value is TILE_WIND => {
     return value === 'E' || value === 'S' || value === 'W' || value === 'N';
 };
 
-const isTileDragon = (value: string): value is TILE_DRAGONS => {
+const isTileDragon = (value: string): value is TILE_DRAGON => {
     return value === 'R' || value === 'W' || value === 'G';
 };
 
@@ -141,14 +141,14 @@ const SOU_TILES: SUIT_TILES = {
     '9': <Sou9 />,
 };
 
-const WIND_TILES: WIND_TILES = {
+const WIND_TILES: WIND_TILES_TYPE = {
     WE: <Ton />, // East
     WS: <Nan />, // South
     WW: <Shaa />, // West
     WN: <Pei />, // North
 };
 
-const DRAGON_TILES: DRAGON_TILES = {
+const DRAGON_TILES: DRAGON_TILES_TYPE = {
     DR: <Chun />, // Red
     DW: <Haku />, // White
     DG: <Hatsu />, // Green
@@ -202,7 +202,7 @@ const isDora = (value: string): boolean => {
     return value.at(-1) === 'd';
 };
 
-const mapWindLetterToName = (letter: TILE_WINDS) => {
+const mapWindLetterToName = (letter: TILE_WIND) => {
     switch (letter) {
         case 'E':
             return 'East';
@@ -215,7 +215,7 @@ const mapWindLetterToName = (letter: TILE_WINDS) => {
     }
 };
 
-const mapDragonLetterToName = (letter: TILE_DRAGONS) => {
+const mapDragonLetterToName = (letter: TILE_DRAGON) => {
     switch (letter) {
         case 'R':
             return 'Red';
@@ -268,13 +268,13 @@ const mapStringToName = (tile: TileProps['code']) => {
 
         case 'W':
             if (isTileWind(rest)) {
-                return `${mapWindLetterToName(rest as TILE_WINDS)}`;
+                return `${mapWindLetterToName(rest as TILE_WIND)}`;
             }
             return 'Unknown tile';
 
         case 'D':
             if (isTileWind(rest)) {
-                return `${mapDragonLetterToName(rest as TILE_DRAGONS)} Dragon`;
+                return `${mapDragonLetterToName(rest as TILE_DRAGON)} Dragon`;
             }
             return 'Unknown tile';
 
