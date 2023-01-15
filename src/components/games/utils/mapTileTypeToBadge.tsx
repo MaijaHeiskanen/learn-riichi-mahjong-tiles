@@ -32,5 +32,9 @@ export const mapTileTypeToBadge = (tileType: INCLUDED_TILES) => {
             break;
     }
 
-    return <Badge color={props.color}>{props.text}</Badge>;
+    return (
+        <Badge key={tileType} color={props.color}>
+            {props.text}
+        </Badge>
+    );
 };

@@ -40,7 +40,10 @@ export const SelectMatchingNameForTile = ({
                 </Center>
                 <Flex gap={'xl'} justify={'center'}>
                     {options.map(option => (
-                        <Tile code={option} />
+                        <Tile
+                            onClick={() => console.log('clicked', option)}
+                            code={option}
+                        />
                     ))}
                 </Flex>
             </Stack>

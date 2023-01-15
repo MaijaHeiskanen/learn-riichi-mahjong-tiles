@@ -1,7 +1,7 @@
 import { Divider, Stack } from '@mantine/core';
 import { Dispatch, SetStateAction } from 'react';
-import { GameMode } from './games/GameMode';
-import { Game, GameSettings } from './games/utils/games';
+import { GameMode } from './GameMode';
+import { Game, GameSettings } from './utils/games';
 
 type GameModeListProps = {
     modes: Game['modes'];
@@ -11,10 +11,10 @@ type GameModeListProps = {
 
 export const GameModeList = ({ modes, type, setGame }: GameModeListProps) => {
     return (
-        <Stack>
+        <>
             {modes.map(({ difficulty, includes }) => {
                 return (
-                    <>
+                    <Stack key={`${type}+${difficulty}+${includes.toString()}`}>
                         <Divider />
                         <GameMode
                             type={type}
@@ -22,9 +22,9 @@ export const GameModeList = ({ modes, type, setGame }: GameModeListProps) => {
                             includes={includes}
                             setGame={setGame}
                         />
-                    </>
+                    </Stack>
                 );
             })}
-        </Stack>
+        </>
     );
 };

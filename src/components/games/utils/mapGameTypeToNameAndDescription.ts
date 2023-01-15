@@ -10,7 +10,7 @@ export const mapGameTypeToNameAndDescription = (type: GAME_TYPES) => {
             };
         case GAME_TYPES.SELECT_NAME_FOR_TILE:
             return {
-                name: 'Select a matching tile for a name',
+                name: 'Select a matching name for a tile',
                 description:
                     'You are given a tile and three possible names for it. You need to choose the name matching the tile.',
             };
