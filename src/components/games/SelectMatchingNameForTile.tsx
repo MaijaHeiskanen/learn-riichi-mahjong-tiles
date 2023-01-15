@@ -8,15 +8,17 @@ import {
     Text,
 } from '@mantine/core';
 import { useState } from 'react';
-import { mapStringToName, Tile, TILES } from '../tiles/Tile';
+import { Tile } from '../tiles/Tile';
+import { TILE } from '../tiles/tileTypes';
+import { mapStringToName } from '../tiles/utils/mapStringToName';
 import { GameSettings } from './utils/games';
 import { mapTileTypeToBadge } from './utils/mapTileTypeToBadge';
 
 type SelectMatchingNameForTileProps = GameSettings;
 
 const ROUNDS = 10;
-const options: TILES[] = ['M3', 'M8', 'M6'];
-const unknown: TILES = 'M6';
+const options: TILE[] = ['M3', 'M8', 'M6'];
+const unknown: TILE = 'M6';
 
 export const SelectMatchingNameForTile = ({
     includes,
