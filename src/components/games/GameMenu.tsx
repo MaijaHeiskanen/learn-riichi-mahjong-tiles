@@ -13,7 +13,21 @@ export const GameMenu = () => {
 
         switch (gameType) {
             case null:
-                return <GameList setGame={setGame} />;
+                return (
+                    <Stack>
+                        <Title align="center">Practice with games</Title>
+                        <Container size={800} mb={20}>
+                            <Text size={'lg'} p={20}>
+                                Play fun games and learn Riichi Tiles! Learn to
+                                recognize all suits and honors. Learn to read
+                                the numbers of Man suit. Learn to tell apart the
+                                different winds. Just choose a game below and
+                                click "Start game"!
+                            </Text>
+                        </Container>
+                        <GameList setGame={setGame} />
+                    </Stack>
+                );
             case GAME_TYPES.SELECT_SUIT_FOR_TILE:
                 return <Text>Coming soon...</Text>;
             case GAME_TYPES.SELECT_NAME_FOR_TILE:
@@ -21,6 +35,7 @@ export const GameMenu = () => {
                     <SelectMatchingNameForTile
                         includes={game!.includes}
                         type={game!.type}
+                        difficulty={game!.difficulty}
                     />
                 );
             case GAME_TYPES.SELECT_TILE_FOR_NAME:
@@ -32,15 +47,6 @@ export const GameMenu = () => {
 
     return (
         <Stack>
-            <Title align="center">Practice with games</Title>
-            <Container size={800} mb={20}>
-                <Text size={'lg'} p={20}>
-                    Play fun games and learn Riichi Tiles! Learn to recognize
-                    all suits and honors. Learn to read the numbers of Man suit.
-                    Learn to tell apart the different winds. Just choose a game
-                    below and click "Start game"!
-                </Text>
-            </Container>
             <Center>{getContent()}</Center>
         </Stack>
     );

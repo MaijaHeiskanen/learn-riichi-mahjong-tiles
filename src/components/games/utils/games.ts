@@ -12,6 +12,7 @@ export type Game = {
 export type GameSettings = {
     type: Game['type'];
     includes: Game['modes'][number]['includes'];
+    difficulty: number;
 };
 
 export const GAMES: Game[] = [

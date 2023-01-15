@@ -72,7 +72,7 @@ type DRAGON_TILES_TYPE = {
     [key in `D${TILE_DRAGON}`]: JSX.Element;
 };
 
-type TILES =
+export type TILES =
     | `M${TILE_NUMBERS_1_TO_9}`
     | `P${TILE_NUMBERS_1_TO_9}`
     | `S${TILE_NUMBERS_1_TO_9}`
@@ -226,7 +226,7 @@ const mapDragonLetterToName = (letter: TILE_DRAGON) => {
     }
 };
 
-const mapStringToName = (tile: TileProps['code']) => {
+export const mapStringToName = (tile: TileProps['code']) => {
     const firstChar = tile[0];
     const rest = tile.slice(1);
 

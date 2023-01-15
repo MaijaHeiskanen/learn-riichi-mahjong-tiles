@@ -46,6 +46,7 @@ export const GameMode = ({
                         setGame({
                             type,
                             includes,
+                            difficulty,
                         })
                     }
                 >
