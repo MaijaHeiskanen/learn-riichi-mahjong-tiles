@@ -2,6 +2,9 @@
 
 [https://maijaheiskanen.github.io/learn-riichi-mahjong-tiles/](https://maijaheiskanen.github.io/learn-riichi-mahjong-tiles/)
 
+![image](https://user-images.githubusercontent.com/54102639/212498997-2504fb96-bb51-4b78-bf46-630fd9b7dec5.png)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
