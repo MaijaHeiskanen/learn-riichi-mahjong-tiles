@@ -1,5 +1,5 @@
 import { Stack, ThemeIcon, Text, useMantineTheme } from '@mantine/core';
-import { KeyboardEventHandler } from 'react';
+import { createRef, KeyboardEventHandler, useEffect, useRef } from 'react';
 import { TILE } from './tileTypes';
 import { mapStringToName } from './utils/mapStringToName';
 import { mapStringToTile } from './utils/mapStringToTile';
@@ -47,7 +47,7 @@ export const Tile = ({
 
     const tile = (
         <Stack
-            tabIndex={0}
+            tabIndex={onClick ? 0 : -1}
             onKeyDown={onClick ? handleKeyDown : undefined}
             onClick={onClick ? tileClicked : undefined}
             sx={
@@ -60,6 +60,11 @@ export const Tile = ({
                           ':hover': {
                               cursor: 'pointer',
                           },
+                          outline: `5px solid ${
+                              greenOutline || redOutline
+                                  ? getOutlineColor()
+                                  : 'none'
+                          }`,
                       }
                     : {}
             }

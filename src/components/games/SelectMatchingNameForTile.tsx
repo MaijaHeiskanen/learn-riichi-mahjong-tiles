@@ -1,4 +1,5 @@
 import {
+    Button,
     Center,
     Container,
     Flex,
@@ -7,7 +8,7 @@ import {
     Stack,
     Text,
 } from '@mantine/core';
-import { useState } from 'react';
+import { createRef, useRef, useState } from 'react';
 import { Tile } from '../tiles/Tile';
 import {
     MAN_TILE_CODES,
@@ -114,9 +115,12 @@ export const SelectMatchingNameForTile = ({
     type,
     difficulty,
 }: SelectMatchingNameForTileProps) => {
+    const ref = createRef<HTMLDivElement>();
     const [initialAnswer, initialOptions] = getRandomTileAndOptions(includes);
 
+    const [gameEnded, setGameEnded] = useState(false);
     const [round, setRound] = useState(1);
+    const [points, setPoints] = useState(0);
     const [selected, setSelected] = useState<TILE | null>(null);
     const [answer, setAnswer] = useState<TILE>(initialAnswer);
     const [options, setOptions] = useState<TILE[]>(initialOptions);
@@ -128,13 +132,18 @@ export const SelectMatchingNameForTile = ({
 
         setSelected(code);
 
+        if (code === answer) {
+            setPoints(p => p + 1);
+        }
+
         setTimeout(() => {
             if (round === ROUNDS) {
-                console.log('game end');
+                setGameEnded(true);
 
                 return;
             }
 
+            ref.current?.focus();
             setRound(r => r + 1);
             setSelected(null);
 
@@ -145,6 +154,17 @@ export const SelectMatchingNameForTile = ({
         }, TO_NEXT_ROUND_TIMEOUT);
     };
 
+    const resetGame = () => {
+        const [newAnswer, newOptions] = getRandomTileAndOptions(includes);
+
+        setAnswer(newAnswer);
+        setOptions(newOptions);
+        setGameEnded(false);
+        setRound(1);
+        setSelected(null);
+        setPoints(0);
+    };
+
     return (
         <Container>
             <Stack>
@@ -153,22 +173,34 @@ export const SelectMatchingNameForTile = ({
                 </Text>
                 <Group>{includes.map(type => mapTileTypeToBadge(type))}</Group>
                 <Difficulty value={difficulty} />
-                <Center>
+                <Center ref={ref}>
                     <Text>{mapStringToName(answer)}</Text>
                 </Center>
                 <Flex gap={'xl'} justify={'center'}>
                     {options.map(option => (
                         <Tile
-                            key={option}
+                            key={`${round}+${option}`}
                             onClick={selectTile}
                             code={option}
-                            greenOutline={selected === answer}
+                            greenOutline={Boolean(
+                                selected && option === answer
+                            )}
                             redOutline={Boolean(
-                                selected && selected !== answer
+                                selected &&
+                                    selected !== answer &&
+                                    selected === option
                             )}
                         />
                     ))}
                 </Flex>
+                {gameEnded && (
+                    <>
+                        <Text>
+                            You got {points} out of {ROUNDS} points
+                        </Text>
+                        <Button onClick={resetGame}>Play again</Button>
+                    </>
+                )}
             </Stack>
         </Container>
     );
