@@ -1,4 +1,4 @@
-import { Stack, ThemeIcon, Text } from '@mantine/core';
+import { Stack, ThemeIcon, Text, useMantineTheme } from '@mantine/core';
 import { KeyboardEventHandler } from 'react';
 import { TILE } from './tileTypes';
 import { mapStringToName } from './utils/mapStringToName';
@@ -7,20 +7,62 @@ import { mapStringToTile } from './utils/mapStringToTile';
 export type TileProps = {
     code: TILE;
     showName?: boolean;
-    onClick?: () => void;
+    onClick?: (code: TILE) => void;
+    greenOutline?: boolean;
+    redOutline?: boolean;
 };
 
-export const Tile = ({ code, showName, onClick }: TileProps) => {
+export const Tile = ({
+    code,
+    showName,
+    onClick,
+    greenOutline,
+    redOutline,
+}: TileProps) => {
+    const theme = useMantineTheme();
+
     const handleKeyDown: KeyboardEventHandler = event => {
         if (event.key === 'Enter') {
-            onClick!();
+            onClick!(code);
         }
     };
+
+    const tileClicked = () => {
+        onClick!(code);
+    };
+
+    const getOutlineColor = () => {
+        const blue = theme.colors.blue[4];
+        const green = theme.colors.green[4];
+        const red = theme.colors.red[4];
+
+        if (greenOutline) {
+            return green;
+        }
+        if (redOutline) {
+            return red;
+        }
+        return blue;
+    };
+
     const tile = (
         <Stack
             tabIndex={0}
             onKeyDown={onClick ? handleKeyDown : undefined}
-            onClick={onClick ? onClick : undefined}
+            onClick={onClick ? tileClicked : undefined}
+            sx={
+                onClick
+                    ? {
+                          ':focus': {
+                              outline: `5px solid ${getOutlineColor()}`,
+                              borderRadius: '4px',
+                          },
+                          ':hover': {
+                              cursor: 'pointer',
+                          },
+                      }
+                    : {}
+            }
         >
             <ThemeIcon p={5} h={100} w={75} color={'white'}>
                 {mapStringToTile(code)}

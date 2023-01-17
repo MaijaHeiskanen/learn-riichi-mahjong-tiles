@@ -1,7 +1,7 @@
 import { Badge, MantineColor } from '@mantine/core';
 import { INCLUDED_TILES } from './consts';
 
-export const mapTileTypeToBadge = (tileType: INCLUDED_TILES) => {
+export const mapTileTypeToBadge = (tileType: INCLUDED_TILES, key?: string) => {
     const props: {
         text: string;
         color: MantineColor;
@@ -33,7 +33,7 @@ export const mapTileTypeToBadge = (tileType: INCLUDED_TILES) => {
     }
 
     return (
-        <Badge key={tileType} color={props.color}>
+        <Badge key={key ?? tileType} color={props.color}>
             {props.text}
         </Badge>
     );

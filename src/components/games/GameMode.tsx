@@ -7,6 +7,7 @@ import {
     Stack,
 } from '@mantine/core';
 import { Dispatch, SetStateAction } from 'react';
+import { Difficulty } from './Difficulty';
 import { GAME_TYPES, INCLUDED_TILES } from './utils/consts';
 import { GameSettings } from './utils/games';
 import { mapTileTypeToBadge } from './utils/mapTileTypeToBadge';
@@ -38,7 +39,7 @@ export const GameMode = ({
                 <Group spacing={'xs'}>
                     {includes.map(value => mapTileTypeToBadge(value))}
                 </Group>
-                <Rating defaultValue={difficulty} readOnly={true} />
+                <Difficulty value={difficulty} />
             </Stack>
             <Center>
                 <Button

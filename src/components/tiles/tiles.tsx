@@ -42,7 +42,12 @@ import { ReactComponent as Hatsu } from './../../svgs/white_tiles/Hatsu.svg';
 
 import { ReactComponent as Blank } from './../../svgs/white_tiles/Blank.svg';
 
-import { DRAGON_TILES_TYPE, SUIT_TILES, WIND_TILES_TYPE } from './tileTypes';
+import {
+    DRAGON_TILES_TYPE,
+    SUIT_TILES,
+    TILE_NUMBERS_1_TO_9,
+    WIND_TILES_TYPE,
+} from './tileTypes';
 
 export const MAN_TILES: SUIT_TILES = {
     '1': <Man1 />,
@@ -57,6 +62,10 @@ export const MAN_TILES: SUIT_TILES = {
     '9': <Man9 />,
 };
 
+export const MAN_TILE_CODES: `M${TILE_NUMBERS_1_TO_9}`[] = [
+    ...Object.keys(MAN_TILES).map(key => `M${key}`),
+] as `M${TILE_NUMBERS_1_TO_9}`[];
+
 export const PIN_TILES: SUIT_TILES = {
     '1': <Pin1 />,
     '2': <Pin2 />,
@@ -69,6 +78,10 @@ export const PIN_TILES: SUIT_TILES = {
     '8': <Pin8 />,
     '9': <Pin9 />,
 };
+
+export const PIN_TILE_CODES: `P${TILE_NUMBERS_1_TO_9}`[] = [
+    ...Object.keys(PIN_TILES).map(key => `P${key}`),
+] as `P${TILE_NUMBERS_1_TO_9}`[];
 
 export const SOU_TILES: SUIT_TILES = {
     '1': <Sou1 />,
@@ -83,6 +96,10 @@ export const SOU_TILES: SUIT_TILES = {
     '9': <Sou9 />,
 };
 
+export const SOU_TILE_CODES: `S${TILE_NUMBERS_1_TO_9}`[] = [
+    ...Object.keys(SOU_TILES).map(key => `S${key}`),
+] as `S${TILE_NUMBERS_1_TO_9}`[];
+
 export const WIND_TILES: WIND_TILES_TYPE = {
     WE: <Ton />, // East
     WS: <Nan />, // South
@@ -90,10 +107,18 @@ export const WIND_TILES: WIND_TILES_TYPE = {
     WN: <Pei />, // North
 };
 
+export const WIND_TILE_CODES: (keyof WIND_TILES_TYPE)[] = [
+    ...Object.keys(WIND_TILES).map(key => `${key}`),
+] as (keyof WIND_TILES_TYPE)[];
+
 export const DRAGON_TILES: DRAGON_TILES_TYPE = {
     DR: <Chun />, // Red
     DW: <Haku />, // White
     DG: <Hatsu />, // Green
 };
+
+export const DRAGON_TILE_CODES: (keyof DRAGON_TILES_TYPE)[] = [
+    ...Object.keys(DRAGON_TILES).map(key => `${key}`),
+] as (keyof DRAGON_TILES_TYPE)[];
 
 export const BLANK_TILE = <Blank />;
