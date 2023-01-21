@@ -1,9 +1,9 @@
 import { MantineProvider, AppShell, Center, Space } from '@mantine/core';
 import { useState } from 'react';
-import { GameMenu } from './games/GameMenu';
 import { SiteFooter } from './layout/SiteFooter';
 import { SiteHeader } from './layout/SiteHeader';
 import { PAGES, SiteNavbar } from './layout/SiteNavbar';
+import { Practice } from './practice/Practice';
 import { Stats } from './stats/Stats';
 import { TileList } from './tiles/TileList';
 
@@ -29,7 +29,7 @@ const App = () => {
             >
                 <Center>
                     {page === PAGES.TILES && <TileList />}
-                    {page === PAGES.TEST && <GameMenu />}
+                    {page === PAGES.TEST && <Practice />}
                     {page === PAGES.STATS && <Stats />}
                 </Center>
 

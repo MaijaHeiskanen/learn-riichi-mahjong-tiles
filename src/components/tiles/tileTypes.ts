@@ -26,6 +26,8 @@ export type DRAGON_TILES_TYPE = {
     [key in `D${TILE_DRAGON}`]: JSX.Element;
 };
 
+export type Suit = 'M' | 'P' | 'S' | 'W' | 'D';
+
 export type TILE =
     | `M${TILE_NUMBERS_1_TO_9}`
     | `P${TILE_NUMBERS_1_TO_9}`

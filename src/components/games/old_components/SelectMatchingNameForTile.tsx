@@ -9,21 +9,21 @@ import {
     Text,
 } from '@mantine/core';
 import { createRef, useRef, useState } from 'react';
-import { Tile } from '../tiles/Tile';
+import { Tile } from '../../tiles/Tile';
 import {
     MAN_TILE_CODES,
     PIN_TILE_CODES,
     SOU_TILE_CODES,
     WIND_TILE_CODES,
     DRAGON_TILE_CODES,
-} from '../tiles/tiles';
+} from '../../tiles/tiles';
 import {
     TILE,
     TILE_DRAGON,
     TILE_NUMBERS_1_TO_9,
     TILE_WIND,
-} from '../tiles/tileTypes';
-import { mapStringToName } from '../tiles/utils/mapStringToName';
+} from '../../tiles/tileTypes';
+import { mapStringToName } from '../../tiles/utils/mapStringToName';
 import { Difficulty } from './Difficulty';
 import { INCLUDED_TILES } from './utils/consts';
 import { GameSettings } from './utils/games';
