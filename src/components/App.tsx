@@ -36,7 +36,6 @@ const App = () => {
                     {page === PAGES.TEST && <Practice />}
                     {page === PAGES.STATS && <Stats />}
                 </Center>
-
                 <Space h={'xl'} />
             </AppShell>
         </MantineProvider>
