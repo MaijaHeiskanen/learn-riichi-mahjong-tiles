@@ -1,5 +1,5 @@
 import { useLocalStorage } from '@mantine/hooks';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { Suit } from '../../tiles/tileTypes';
 
 export type GameSettings = {
@@ -10,7 +10,7 @@ export type GameSettings = {
     useTimer: boolean;
 };
 
-const DEFAULT_GAME_SETTINGS: GameSettings = {
+export const DEFAULT_GAME_SETTINGS: GameSettings = {
     suits: {
         M: true,
         P: true,

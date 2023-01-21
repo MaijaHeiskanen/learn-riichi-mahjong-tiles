@@ -6,10 +6,11 @@ import {
     Group,
     NumberInput,
     Checkbox,
+    Button,
 } from '@mantine/core';
 import { Dispatch, SetStateAction } from 'react';
 import { Suit } from '../tiles/tileTypes';
-import { GameSettings } from './hooks/useGameSettings';
+import { DEFAULT_GAME_SETTINGS, GameSettings } from './hooks/useGameSettings';
 import { SuitChip } from './SuitChip';
 
 const SUITS: Suit[] = ['M', 'P', 'S', 'W', 'D'];
@@ -29,11 +30,17 @@ export const Settings = ({ settings, setSettings }: SettingsProps) => {
     };
 
     const roundsChanged = (newValue: number | undefined) => {
-        setSettings({ ...settings, rounds: newValue ?? 10 });
+        setSettings({
+            ...settings,
+            rounds: newValue ?? DEFAULT_GAME_SETTINGS.rounds,
+        });
     };
 
     const answerOptionsChanged = (newValue: number | undefined) => {
-        setSettings({ ...settings, answerOptions: newValue ?? 10 });
+        setSettings({
+            ...settings,
+            answerOptions: newValue ?? DEFAULT_GAME_SETTINGS.answerOptions,
+        });
     };
 
     const rotateTilesChanged = (newValue: boolean) => {
@@ -46,9 +53,17 @@ export const Settings = ({ settings, setSettings }: SettingsProps) => {
 
     return (
         <Stack>
-            <Title mb={30} size={'h2'}>
-                Game Settings
-            </Title>
+            <Group align={'baseline'} position="apart">
+                <Title mb={30} size={'h2'}>
+                    Game Settings
+                </Title>
+                <Button
+                    onClick={() => setSettings(DEFAULT_GAME_SETTINGS)}
+                    variant="subtle"
+                >
+                    Reset settings
+                </Button>
+            </Group>
             <SimpleGrid
                 cols={1}
                 spacing={30}
