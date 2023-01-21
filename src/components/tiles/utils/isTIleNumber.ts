@@ -1,6 +1,6 @@
-import { TILE_NUMBERS_1_TO_9 } from '../tileTypes';
+import { NumbersFrom1To9 } from './types';
 
-export const isTileNumber = (value: string): value is TILE_NUMBERS_1_TO_9 => {
+export const isNumber = (value: string): value is NumbersFrom1To9 => {
     return (
         value === '1' ||
         value === '2' ||

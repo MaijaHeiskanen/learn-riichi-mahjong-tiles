@@ -41,84 +41,63 @@ import { ReactComponent as Haku } from './../../svgs/white_tiles/Haku.svg';
 import { ReactComponent as Hatsu } from './../../svgs/white_tiles/Hatsu.svg';
 
 import { ReactComponent as Blank } from './../../svgs/white_tiles/Blank.svg';
+import { TileCode } from './tileCodes';
 
-import {
-    DRAGON_TILES_TYPE,
-    SUIT_TILES,
-    TILE_NUMBERS_1_TO_9,
-    WIND_TILES_TYPE,
-} from './tileTypes';
-
-export const MAN_TILES: SUIT_TILES = {
-    '1': <Man1 />,
-    '2': <Man2 />,
-    '3': <Man3 />,
-    '4': <Man4 />,
-    '5': <Man5 />,
-    '5d': <Man5Dora />,
-    '6': <Man6 />,
-    '7': <Man7 />,
-    '8': <Man8 />,
-    '9': <Man9 />,
+const TILE_COMPONENTS: Record<
+    TileCode | 'Blank',
+    {
+        component: JSX.Element;
+        name: string;
+    }
+> = {
+    M1: { component: <Man1 />, name: 'Man 1' },
+    M2: { component: <Man2 />, name: 'Man 2' },
+    M3: { component: <Man3 />, name: 'Man 3' },
+    M4: { component: <Man4 />, name: 'Man 4' },
+    M5: { component: <Man5 />, name: 'Man 5' },
+    M5d: { component: <Man5Dora />, name: 'Man 5 dora' },
+    M6: { component: <Man6 />, name: 'Man 6' },
+    M7: { component: <Man7 />, name: 'Man 7' },
+    M8: { component: <Man8 />, name: 'Man 8' },
+    M9: { component: <Man9 />, name: 'Man 9' },
+    P1: { component: <Pin1 />, name: 'Pin 1' },
+    P2: { component: <Pin2 />, name: 'Pin 2' },
+    P3: { component: <Pin3 />, name: 'Pin 3' },
+    P4: { component: <Pin4 />, name: 'Pin 4' },
+    P5: { component: <Pin5 />, name: 'Pin 5' },
+    P5d: { component: <Pin5Dora />, name: 'Pin 5 dora' },
+    P6: { component: <Pin6 />, name: 'Pin 6' },
+    P7: { component: <Pin7 />, name: 'Pin 7' },
+    P8: { component: <Pin8 />, name: 'Pin 8' },
+    P9: { component: <Pin9 />, name: 'Pin 9' },
+    S1: { component: <Sou1 />, name: 'Sou 1' },
+    S2: { component: <Sou2 />, name: 'Sou 2' },
+    S3: { component: <Sou3 />, name: 'Sou 3' },
+    S4: { component: <Sou4 />, name: 'Sou 4' },
+    S5: { component: <Sou5 />, name: 'Sou 5' },
+    S5d: { component: <Sou5Dora />, name: 'Sou 5 dora' },
+    S6: { component: <Sou6 />, name: 'Sou 6' },
+    S7: { component: <Sou7 />, name: 'Sou 7' },
+    S8: { component: <Sou8 />, name: 'Sou 8' },
+    S9: { component: <Sou9 />, name: 'Sou 9' },
+    WE: { component: <Ton />, name: 'East' },
+    WS: { component: <Nan />, name: 'South' },
+    WW: { component: <Shaa />, name: 'West' },
+    WN: { component: <Pei />, name: 'North' },
+    DR: { component: <Chun />, name: 'Red Dragon' },
+    DW: { component: <Haku />, name: 'White Dragon' },
+    DG: { component: <Hatsu />, name: 'Green Dragon' },
+    Blank: { component: <Blank />, name: 'Unkown tile' },
 };
 
-export const MAN_TILE_CODES: `M${TILE_NUMBERS_1_TO_9}`[] = [
-    ...Object.keys(MAN_TILES).map(key => `M${key}`),
-] as `M${TILE_NUMBERS_1_TO_9}`[];
+export const getTileComponent = (code: string) => {
+    const component = TILE_COMPONENTS[code as TileCode];
 
-export const PIN_TILES: SUIT_TILES = {
-    '1': <Pin1 />,
-    '2': <Pin2 />,
-    '3': <Pin3 />,
-    '4': <Pin4 />,
-    '5': <Pin5 />,
-    '5d': <Pin5Dora />,
-    '6': <Pin6 />,
-    '7': <Pin7 />,
-    '8': <Pin8 />,
-    '9': <Pin9 />,
+    return component?.component ?? TILE_COMPONENTS['Blank'].component;
 };
 
-export const PIN_TILE_CODES: `P${TILE_NUMBERS_1_TO_9}`[] = [
-    ...Object.keys(PIN_TILES).map(key => `P${key}`),
-] as `P${TILE_NUMBERS_1_TO_9}`[];
+export const getTileName = (code: string) => {
+    const component = TILE_COMPONENTS[code as TileCode];
 
-export const SOU_TILES: SUIT_TILES = {
-    '1': <Sou1 />,
-    '2': <Sou2 />,
-    '3': <Sou3 />,
-    '4': <Sou4 />,
-    '5': <Sou5 />,
-    '5d': <Sou5Dora />,
-    '6': <Sou6 />,
-    '7': <Sou7 />,
-    '8': <Sou8 />,
-    '9': <Sou9 />,
+    return component?.name ?? TILE_COMPONENTS['Blank'].name;
 };
-
-export const SOU_TILE_CODES: `S${TILE_NUMBERS_1_TO_9}`[] = [
-    ...Object.keys(SOU_TILES).map(key => `S${key}`),
-] as `S${TILE_NUMBERS_1_TO_9}`[];
-
-export const WIND_TILES: WIND_TILES_TYPE = {
-    WE: <Ton />, // East
-    WS: <Nan />, // South
-    WW: <Shaa />, // West
-    WN: <Pei />, // North
-};
-
-export const WIND_TILE_CODES: (keyof WIND_TILES_TYPE)[] = [
-    ...Object.keys(WIND_TILES).map(key => `${key}`),
-] as (keyof WIND_TILES_TYPE)[];
-
-export const DRAGON_TILES: DRAGON_TILES_TYPE = {
-    DR: <Chun />, // Red
-    DW: <Haku />, // White
-    DG: <Hatsu />, // Green
-};
-
-export const DRAGON_TILE_CODES: (keyof DRAGON_TILES_TYPE)[] = [
-    ...Object.keys(DRAGON_TILES).map(key => `${key}`),
-] as (keyof DRAGON_TILES_TYPE)[];
-
-export const BLANK_TILE = <Blank />;

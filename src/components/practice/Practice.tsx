@@ -1,4 +1,4 @@
-import { Button, Center, Container } from '@mantine/core';
+import { Button, Card, Center, Container } from '@mantine/core';
 import { useState } from 'react';
 import { Game } from './Game';
 import { useGameSettings } from './hooks/useGameSettings';
@@ -18,19 +18,24 @@ export const Practice = () => {
 
     return (
         <Container size={'lg'}>
-            {gameStarted ? (
-                <Game />
-            ) : (
-                <>
-                    <Settings settings={settings} setSettings={setSettings} />
+            <Card p={'xl'}>
+                {gameStarted ? (
+                    <Game settings={settings} endGame={endGame} />
+                ) : (
+                    <>
+                        <Settings
+                            settings={settings}
+                            setSettings={setSettings}
+                        />
 
-                    <Center mt={80}>
-                        <Button size="xl" onClick={startGame}>
-                            Start game
-                        </Button>
-                    </Center>
-                </>
-            )}
+                        <Center mt={80}>
+                            <Button size="xl" onClick={startGame}>
+                                Start game
+                            </Button>
+                        </Center>
+                    </>
+                )}
+            </Card>
         </Container>
     );
 };

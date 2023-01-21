@@ -1,4 +1,4 @@
-import { Suit } from '../../tiles/tileTypes';
+import { Suit } from '../hooks/useGameSettings';
 
 export const mapSuitCodeToSuitColor = (suit: Suit) => {
     switch (suit) {

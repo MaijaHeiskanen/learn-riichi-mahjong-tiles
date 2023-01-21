@@ -1,6 +1,12 @@
 import { useLocalStorage } from '@mantine/hooks';
 import { Dispatch, SetStateAction } from 'react';
-import { Suit } from '../../tiles/tileTypes';
+
+export type Suit = 'M' | 'P' | 'S' | 'W' | 'D';
+
+export const enum GameMode {
+    NAME_TO_TILE = 'name_to_tile',
+    TILE_TO_NAME = 'tile_to_name',
+}
 
 export type GameSettings = {
     suits: Record<Suit, boolean>;
@@ -8,6 +14,7 @@ export type GameSettings = {
     answerOptions: number;
     rotateTiles: boolean;
     useTimer: boolean;
+    mode: GameMode;
 };
 
 export const DEFAULT_GAME_SETTINGS: GameSettings = {
@@ -22,6 +29,7 @@ export const DEFAULT_GAME_SETTINGS: GameSettings = {
     answerOptions: 3,
     rotateTiles: false,
     useTimer: false,
+    mode: GameMode.NAME_TO_TILE,
 };
 
 export const useGameSettings = (): [

@@ -1,5 +1,5 @@
 import { Chip } from '@mantine/core';
-import { Suit } from '../tiles/tileTypes';
+import { Suit } from './hooks/useGameSettings';
 import { mapSuitCodeToSuitColor } from './utils/mapSuitCodeToSuitColor';
 import { mapSuitCodeToSuitName } from './utils/mapSuitCodeToSuitName';
 

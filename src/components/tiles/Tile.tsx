@@ -1,13 +1,12 @@
 import { Stack, ThemeIcon, Text, useMantineTheme } from '@mantine/core';
-import { createRef, KeyboardEventHandler, useEffect, useRef } from 'react';
-import { TILE } from './tileTypes';
-import { mapStringToName } from './utils/mapStringToName';
-import { mapStringToTile } from './utils/mapStringToTile';
+import { KeyboardEventHandler } from 'react';
+import { TileCode } from './tileCodes';
+import { getTileComponent, getTileName } from './tiles';
 
 export type TileProps = {
-    code: TILE;
+    code: TileCode;
     showName?: boolean;
-    onClick?: (code: TILE) => void;
+    onClick?: (code: TileCode) => void;
     greenOutline?: boolean;
     redOutline?: boolean;
 };
@@ -70,11 +69,11 @@ export const Tile = ({
             }
         >
             <ThemeIcon p={5} h={100} w={75} color={'white'}>
-                {mapStringToTile(code)}
+                {getTileComponent(code)}
             </ThemeIcon>
             {showName && (
                 <Text size={'sm'} align="center">
-                    {mapStringToName(code)}
+                    {getTileName(code)}
                 </Text>
             )}
         </Stack>
