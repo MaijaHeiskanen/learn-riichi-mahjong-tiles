@@ -1,5 +1,5 @@
 import { Stack, ThemeIcon, Text, useMantineTheme } from '@mantine/core';
-import { KeyboardEventHandler } from 'react';
+import { KeyboardEventHandler, useState } from 'react';
 import { getRandomIntFromRange } from '../../utils/getRandomIntFromRange';
 import { TileCode } from './tileCodes';
 import { getTileComponent, getTileName } from './tiles';
@@ -48,6 +48,9 @@ export const Tile = ({
     disabled,
 }: TileProps) => {
     const theme = useMantineTheme();
+    const [properties] = useState(
+        getHeightWidthRotation(rotateRandomly ?? false)
+    );
 
     const handleKeyDown: KeyboardEventHandler = event => {
         if (disabled) return;
@@ -77,9 +80,7 @@ export const Tile = ({
         return blue;
     };
 
-    const { rotation, width, height } = getHeightWidthRotation(
-        rotateRandomly ?? false
-    );
+    const { rotation, width, height } = properties;
 
     const tile = (
         <Stack
