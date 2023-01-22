@@ -6,6 +6,7 @@ import {
     Group,
     Stack,
     Text,
+    useMantineTheme,
 } from '@mantine/core';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { getRandomIntFromRange } from '../../utils/getRandomIntFromRange';
@@ -20,7 +21,7 @@ import {
     WIND_TILE_CODES,
 } from '../tiles/tileCodes';
 import { getTileName } from '../tiles/tiles';
-import { GameSettings, Suit } from './hooks/useGameSettings';
+import { GameMode, GameSettings, Suit } from './hooks/useGameSettings';
 
 const ROUND_TIMEOUT = 1000;
 
@@ -102,6 +103,8 @@ const setAnswerAndOptions = (
 };
 
 export const Game = ({ settings, endGame }: GameProps) => {
+    const theme = useMantineTheme();
+
     const [round, setRound] = useState(1);
     const [points, setPoints] = useState(0);
     const [selected, setSelected] = useState<TileCode | null>(null);
@@ -141,6 +144,20 @@ export const Game = ({ settings, endGame }: GameProps) => {
         setGameEnded(false);
     };
 
+    const getOutlineColor = (tileCode: TileCode) => {
+        const blue = theme.colors.blue[4];
+        const green = theme.colors.green[4];
+        const red = theme.colors.red[4];
+
+        if (Boolean(selected && tileCode === answer)) {
+            return green;
+        }
+        if (Boolean(selected && selected !== answer && tileCode !== answer)) {
+            return red;
+        }
+        return undefined;
+    };
+
     return (
         <Container size={'xl'}>
             <Stack>
@@ -149,25 +166,67 @@ export const Game = ({ settings, endGame }: GameProps) => {
                         Round {round}/{settings.rounds}
                     </Text>
                 </Card>
-                <Center>{answer && <Text>{getTileName(answer)}</Text>}</Center>
-                <Group position="center">
-                    {options.map(option => (
+                <Center>
+                    {answer && settings.mode === GameMode.NAME_TO_TILE ? (
+                        <Text>{getTileName(answer)}</Text>
+                    ) : (
                         <Tile
-                            disabled={Boolean(selected)}
-                            key={`${round}-${option}`}
-                            code={option}
+                            code={answer!}
                             rotateRandomly={settings.rotateTiles}
-                            onClick={selectTile}
-                            greenOutline={Boolean(
-                                selected && option === answer
-                            )}
-                            redOutline={Boolean(
-                                selected &&
-                                    selected !== answer &&
-                                    option !== answer
-                            )}
                         />
-                    ))}
+                    )}
+                </Center>
+                <Group position="center">
+                    {options.map(option =>
+                        settings.mode === GameMode.NAME_TO_TILE ? (
+                            <Tile
+                                disabled={Boolean(selected)}
+                                key={`${round}-${option}`}
+                                code={option}
+                                rotateRandomly={settings.rotateTiles}
+                                onClick={selectTile}
+                                greenOutline={Boolean(
+                                    selected && option === answer
+                                )}
+                                redOutline={Boolean(
+                                    selected &&
+                                        selected !== answer &&
+                                        option !== answer
+                                )}
+                            />
+                        ) : (
+                            <Card
+                                tabIndex={0}
+                                withBorder
+                                key={`${round}-${option}`}
+                                onClick={() => selectTile(option)}
+                                sx={{
+                                    borderColor: getOutlineColor(option),
+                                    borderRadius: '2px',
+                                    ':focus': {
+                                        outline: `3px solid ${theme.colors.blue[4]}`,
+                                    },
+                                    ':hover': {
+                                        cursor: 'pointer',
+                                    },
+                                    outline: `5px solid ${
+                                        Boolean(
+                                            selected && option === answer
+                                        ) ||
+                                        Boolean(
+                                            selected &&
+                                                selected !== answer &&
+                                                option !== answer
+                                        )
+                                            ? getOutlineColor(option)
+                                            : 'none'
+                                    }`,
+                                }}
+                            >
+                                <Text>{getTileName(option)}</Text>
+                            </Card>
+                        )
+                    )}
                 </Group>
                 {gameEnded && (
                     <Stack>
