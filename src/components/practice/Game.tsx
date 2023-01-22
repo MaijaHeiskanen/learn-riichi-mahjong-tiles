@@ -1,3 +1,5 @@
+import { Card, Container, Stack, Text } from '@mantine/core';
+import { useState } from 'react';
 import { GameSettings } from './hooks/useGameSettings';
 
 type GameProps = {
@@ -6,5 +8,17 @@ type GameProps = {
 };
 
 export const Game = ({ settings, endGame }: GameProps) => {
-    return <div>Game</div>;
+    const [round, setRound] = useState(1);
+
+    return (
+        <Container size={'xl'}>
+            <Stack>
+                <Card withBorder>
+                    <Text>
+                        Round {round}/{settings.rounds}
+                    </Text>
+                </Card>
+            </Stack>
+        </Container>
+    );
 };

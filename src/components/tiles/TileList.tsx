@@ -23,14 +23,14 @@ export const TileList = () => {
                 <Title size={'h2'}>Riichi Tiles</Title>
 
                 {TILE_GROUPS.map(({ title, tileCodes }) => (
-                    <>
+                    <Stack key={title}>
                         <Title size={'h3'}>{title}</Title>
                         <Group>
                             {tileCodes.map(code => (
-                                <Tile code={code} showName />
+                                <Tile key={code} code={code} showName />
                             ))}
                         </Group>
-                    </>
+                    </Stack>
                 ))}
             </Stack>
         </Card>
