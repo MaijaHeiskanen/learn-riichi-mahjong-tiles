@@ -35,6 +35,7 @@ export type TileProps = {
     greenOutline?: boolean;
     redOutline?: boolean;
     rotateRandomly?: boolean;
+    disabled?: boolean;
 };
 
 export const Tile = ({
@@ -44,16 +45,21 @@ export const Tile = ({
     greenOutline,
     redOutline,
     rotateRandomly,
+    disabled,
 }: TileProps) => {
     const theme = useMantineTheme();
 
     const handleKeyDown: KeyboardEventHandler = event => {
+        if (disabled) return;
+
         if (event.key === 'Enter') {
             onClick!(code);
         }
     };
 
     const tileClicked = () => {
+        if (disabled) return;
+
         onClick!(code);
     };
 
@@ -83,9 +89,9 @@ export const Tile = ({
             sx={
                 onClick
                     ? {
+                          borderRadius: '4px',
                           ':focus': {
                               outline: `5px solid ${getOutlineColor()}`,
-                              borderRadius: '4px',
                           },
                           ':hover': {
                               cursor: 'pointer',

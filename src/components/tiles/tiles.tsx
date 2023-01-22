@@ -98,12 +98,9 @@ export const getTileComponent = (code: string, rotation?: number) => {
     const tileObj = TILE_COMPONENTS[code as TileCode];
     const Component = tileObj?.component ?? TILE_COMPONENTS['Blank'].component;
 
-    console.log(rotation);
-
     return (
         <Component
             style={{
-                // transform: `rotate(${Number(rotation ?? 0)}deg ${50}% ${50}%)`,
                 rotate: `${Number(rotation ?? 0)}deg`,
                 scale: `${Number((rotation ?? 0) % 180 !== 0 ? 0.7 : 1)}`,
             }}

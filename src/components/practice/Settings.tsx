@@ -100,7 +100,7 @@ export const Settings = ({ settings, setSettings }: SettingsProps) => {
                         Mode
                     </Text>
                     <SegmentedControl
-                        transitionDuration={100}
+                        transitionDuration={0}
                         value={settings.mode}
                         onChange={modeChanged}
                         data={[
