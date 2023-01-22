@@ -204,7 +204,11 @@ export const Game = ({ settings, endGame }: GameProps) => {
                                     borderColor: getOutlineColor(option),
                                     borderRadius: '2px',
                                     ':focus': {
-                                        outline: `3px solid ${theme.colors.blue[4]}`,
+                                        outline: `3px solid ${
+                                            selected
+                                                ? undefined
+                                                : theme.colors.blue[4]
+                                        }`,
                                     },
                                     ':hover': {
                                         cursor: 'pointer',
