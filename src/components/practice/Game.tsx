@@ -72,12 +72,15 @@ const getRoundTileCodes = (
 ): [TileCode, TileCode[]] => {
     const suitsInUse = getSuitsInUse(suits);
     const randomSuit = getRandomSuit(suitsInUse);
-    const tileCodes = getSuitTileCodes(randomSuit);
+    let tileCodes = getSuitTileCodes(randomSuit);
     const answer = splicaRandomTileCode(tileCodes);
 
     const options: TileCode[] = [answer];
 
     for (let i = 1; i < answerOptions; i++) {
+        if (tileCodes.length < 1) {
+            break;
+        }
         options.push(splicaRandomTileCode(tileCodes));
     }
 

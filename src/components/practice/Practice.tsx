@@ -16,6 +16,16 @@ export const Practice = () => {
         setGameStarted(false);
     };
 
+    let atLeastOneSuitSelected = false;
+
+    for (const key in settings.suits) {
+        if (settings.suits[key as keyof typeof settings.suits]) {
+            atLeastOneSuitSelected = true;
+
+            break;
+        }
+    }
+
     return (
         <Container size={'lg'}>
             <Card p={'xl'}>
@@ -29,7 +39,11 @@ export const Practice = () => {
                         />
 
                         <Center mt={80}>
-                            <Button size="xl" onClick={startGame}>
+                            <Button
+                                size="xl"
+                                onClick={startGame}
+                                disabled={!atLeastOneSuitSelected}
+                            >
                                 Start game
                             </Button>
                         </Center>
