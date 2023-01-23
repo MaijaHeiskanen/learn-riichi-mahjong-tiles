@@ -69,7 +69,8 @@ const splicaRandomTileCode = (tileCodes: TileCode[]) => {
 
 const getRoundTileCodes = (
     suits: GameSettings['suits'],
-    answerOptions: GameSettings['answerOptions']
+    answerOptions: GameSettings['answerOptions'],
+    mode: GameSettings['mode']
 ): [TileCode, TileCode[]] => {
     const suitsInUse = getSuitsInUse(suits);
     const randomSuit = getRandomSuit(suitsInUse);
@@ -85,7 +86,12 @@ const getRoundTileCodes = (
         options.push(splicaRandomTileCode(tileCodes));
     }
 
-    return [answer, shuffle(options)];
+    return [
+        answer,
+        mode === GameMode.NAME_TO_TILE
+            ? shuffle(options)
+            : options.sort((a, b) => (a > b ? 1 : -1)),
+    ];
 };
 
 const setAnswerAndOptions = (
@@ -95,7 +101,8 @@ const setAnswerAndOptions = (
 ) => {
     const [firstAnswer, firstOptions] = getRoundTileCodes(
         settings.suits,
-        settings.answerOptions
+        settings.answerOptions,
+        settings.mode
     );
 
     setAnswer(firstAnswer);
