@@ -19,6 +19,10 @@ import {
 import { SuitChip } from './SuitChip';
 
 const SUITS = ['M', 'P', 'S', 'W', 'D'] as const;
+const MAX_ROUNDS = 1000;
+const MIN_ROUNDS = 1;
+const MAX_ANSWER_OPTIONS = 10;
+const MIN_ANSWER_OPTIONS = 2;
 
 type SettingsProps = {
     settings: GameSettings;
@@ -158,8 +162,8 @@ export const Settings = ({ settings, setSettings }: SettingsProps) => {
                         }
                         stepHoldDelay={500}
                         stepHoldInterval={100}
-                        min={1}
-                        max={10000}
+                        min={MIN_ROUNDS}
+                        max={MAX_ROUNDS}
                         onChange={roundsChanged}
                         value={settings.rounds}
                     />
@@ -177,8 +181,8 @@ export const Settings = ({ settings, setSettings }: SettingsProps) => {
                         }
                         stepHoldDelay={500}
                         stepHoldInterval={100}
-                        min={2}
-                        max={9}
+                        min={MIN_ANSWER_OPTIONS}
+                        max={MAX_ANSWER_OPTIONS}
                         onChange={answerOptionsChanged}
                         value={settings.answerOptions}
                     />

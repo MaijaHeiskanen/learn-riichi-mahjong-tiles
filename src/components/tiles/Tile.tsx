@@ -1,6 +1,8 @@
 import { Stack, ThemeIcon, Text, useMantineTheme } from '@mantine/core';
-import { KeyboardEventHandler, useState } from 'react';
+import { KeyboardEventHandler, useEffect, useState } from 'react';
 import { getRandomIntFromRange } from '../../utils/getRandomIntFromRange';
+import { OptionProps } from '../practice/Game';
+import { getOptionStyles } from '../practice/utils/getOptionStyles';
 import { TileCode } from './tileCodes';
 import { getTileComponent, getTileName } from './tiles';
 
@@ -36,7 +38,7 @@ export type TileProps = {
     redOutline?: boolean;
     rotateRandomly?: boolean;
     disabled?: boolean;
-};
+} & OptionProps;
 
 export const Tile = ({
     code,
@@ -48,7 +50,7 @@ export const Tile = ({
     disabled,
 }: TileProps) => {
     const theme = useMantineTheme();
-    const [properties] = useState(
+    const [properties, setProperties] = useState(
         getHeightWidthRotation(rotateRandomly ?? false)
     );
 
@@ -66,19 +68,12 @@ export const Tile = ({
         onClick!(code);
     };
 
-    const getOutlineColor = () => {
-        const blue = theme.colors.blue[4];
-        const green = theme.colors.green[4];
-        const red = theme.colors.red[4];
-
-        if (greenOutline) {
-            return green;
+    useEffect(() => {
+        if (!onClick && rotateRandomly) {
+            setProperties(getHeightWidthRotation(true));
         }
-        if (redOutline) {
-            return red;
-        }
-        return blue;
-    };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [code]);
 
     const { rotation, width, height } = properties;
 
@@ -87,24 +82,12 @@ export const Tile = ({
             tabIndex={onClick ? 0 : -1}
             onKeyDown={onClick ? handleKeyDown : undefined}
             onClick={onClick ? tileClicked : undefined}
-            sx={
-                onClick
-                    ? {
-                          borderRadius: '4px',
-                          ':focus': {
-                              outline: `5px solid ${getOutlineColor()}`,
-                          },
-                          ':hover': {
-                              cursor: 'pointer',
-                          },
-                          outline: `5px solid ${
-                              greenOutline || redOutline
-                                  ? getOutlineColor()
-                                  : 'none'
-                          }`,
-                      }
-                    : {}
-            }
+            sx={getOptionStyles({
+                theme,
+                clickable: Boolean(onClick),
+                greenOutline: Boolean(greenOutline),
+                redOutline: Boolean(redOutline),
+            })}
         >
             <ThemeIcon p={5} h={height} w={width} color={'white'}>
                 {getTileComponent(code, rotation)}
