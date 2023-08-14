@@ -1,4 +1,4 @@
-# Demo available
+# Available
 
 [https://maijaheiskanen.github.io/learn-riichi-mahjong-tiles/](https://maijaheiskanen.github.io/learn-riichi-mahjong-tiles/)
 
