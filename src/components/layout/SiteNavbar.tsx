@@ -22,7 +22,7 @@ type SiteNavbarProps = {
 const NAV_ITEMS = [
     { label: 'Tiles', icon: <IconCards />, linkedPage: PAGES.TILES },
     { label: 'Practice', icon: <IconPencil />, linkedPage: PAGES.TEST },
-    { label: 'Statistics', icon: <IconGraph />, linkedPage: PAGES.STATS },
+    // { label: 'Statistics', icon: <IconGraph />, linkedPage: PAGES.STATS },
 ];
 
 export const SiteNavbar = ({ opened, page, setPage }: SiteNavbarProps) => {
